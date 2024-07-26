@@ -48,5 +48,9 @@ MANIFEST
 
 # Per-project virtualenvs
 .venv*/
+venv/
 env/
-*.sqlite *.db
+
+#dbs file
+*.sqlite 
+*.db

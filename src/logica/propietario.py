@@ -13,6 +13,18 @@ class Propietario():
         Base.metadata.drop_all(engine)
         Base.metadata.create_all(engine)
     
+    # Autenticación de usuario	a modificar con API
+    def autenticar_usuario(self, usuario, contrasena):
+        print(f'Usuario: {usuario}, Contraseña: {contrasena}')
+
+        # Validación de usuario temporal
+
+        if usuario == 'admin' and contrasena == 'admin':
+            return True
+        else:
+            return False
+
+
     def dar_autos(self):
         session = Session()
         vehiculos = session.query(Vehiculo).all()

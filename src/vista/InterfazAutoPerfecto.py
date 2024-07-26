@@ -1,10 +1,14 @@
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
 
 from .Vista_lista_autos import Vista_lista_autos
 from .Vista_lista_mantenimientos import Vista_lista_mantenimientos
 from .Vista_auto import Vista_auto
 from .Vista_lista_acciones import Vista_lista_acciones
 from .Vista_reporte_gastos import Vista_reporte_gastos
+from .Vista_login import LoginWindow
 
 class App_AutoPerfecto(QApplication):
     """
@@ -18,8 +22,16 @@ class App_AutoPerfecto(QApplication):
         super(App_AutoPerfecto, self).__init__(sys_argv)
 
         self.logica = logica
-        self.mostrar_vista_lista_autos()
+        #self.mostrar_vista_lista_autos()
+        
+        # Autenticacion usuario
+        login = LoginWindow(self.logica)    
+        if login.exec_() == QDialog.Accepted:
+            self.mostrar_vista_lista_autos()
+        else:
+            sys.exit()
 
+        
 
     def mostrar_vista_lista_autos(self):
         """

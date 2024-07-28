@@ -14,7 +14,15 @@
 [GitInspector](https://misw-4101-practicas.github.io/MISW4101-202214-Grupo023/reports)
 
 ## AutoPerfecto-tobe
-AutoPerfecto-tobe es una herramienta automatizada diseñada para la administración del mantenimiento de tu vehículo. Este repositorio contiene todo el código fuente necesario para comenzar a utilizar Perfecto.
+AutoPerfecto-tobe es una herramienta automatizada diseñada para la administración del mantenimiento de tu vehículo. Este repositorio contiene todo el código fuente necesario para comenzar a utilizar AutoPerfecto-tobe.
+
+La aplicación de AutoPerfecto-tobe incluye las siguientes funcionalidades: 
+* Gestión de Vehículos: Permite a los usuarios agregar, actualizar y eliminar información sobre sus vehículos. 
+* Registro de Gastos: Facilita el seguimiento de los gastos asociados a cada vehículo, incluyendo mantenimientos, reparaciones y seguros.
+* Reportes: Genera reportes detallados sobre el estado de los vehículos y los costos asociados. 
+
+## Capturas de pantalla
+![captura de pantalla de la aplicacion](https://github.com/user-attachments/assets/62a36e43-66bb-46fd-839c-0b09f018deab)
 
 ### Requisitos Previos
 Antes de comenzar, asegúrate de tener instalados los siguientes componentes:
@@ -36,10 +44,6 @@ cd AutoPerfecto-tobe
 ```
 npm install
 ```
-
-## Capturas de pantalla
-![cpatura de pantallad e la palicación](https://github.com/user-attachments/assets/62a36e43-66bb-46fd-839c-0b09f018deab)
-
 
 ## Contribución
 Si deseas contribuir a este proyecto, por favor sigue estos pasos:

@@ -1,5 +1,14 @@
-# MISW4101-202214-Grupo023
-Espacio de trabajo del grupo 023
+| Proyecto    | G15_202413 - Modernización de Software  |
+|-------------|--------------------------------------|
+| **Grupo**   | 15                                   | 
+
+## Colaboradores
+| Integrantes | Nombre                          | Rol             | Correo                       |
+| ----------- | ------------------------------- | --------------- | ---------------------------- |
+|     1       | David Fernando Guerrero Vanegas | Team Developer  | df.guerrerov1@uniandes.edu.co|
+|     2       | Leonardo Wilches Marcelo        | Team Developer  | l.wilchesm@uniandes.edu.co   |
+|     3       | Arturo Reyna Reyes              | Team Developer  | a.reyna@uniandes.edu.co      |
+|     4       | Mario Robinson Gómez Castañeda  | Team Developer  | mr.gomezc1@uniandes.edu.co   |
  
 ## Reporte
 [GitInspector](https://misw-4101-practicas.github.io/MISW4101-202214-Grupo023/reports)

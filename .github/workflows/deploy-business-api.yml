@@ -1,4 +1,4 @@
-name: Deploy Api-Auth In Elastic Beanstalk
+name: Deploy Api-business In Elastic Beanstalk
 on:
     pull_request:
       branches:

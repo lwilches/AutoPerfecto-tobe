@@ -4,8 +4,9 @@ from src.vista.InterfazAutoPerfecto import App_AutoPerfecto
 from src.logica.Logica_mock import Logica_mock
 from src.logica.propietario import Propietario
 
-
-base_url = "http://127.0.0.1:5000" # URL de la API atutenicacion AWS
+# URL de la API atutenicacion AWS
+#base_url = "http://127.0.0.1:5000"  --Test Local
+base_url = "http://auto-perfecto-auth-api-qa.eba-2pznwn73.us-east-1.elasticbeanstalk.com"
 
 if __name__ == '__main__':
     

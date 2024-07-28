@@ -37,7 +37,6 @@ jobs:
             docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG   
 
         - name: Create config.json with environment variables
-          if: build-push  
           id: create-json
           run: |
             echo '[
@@ -63,9 +62,7 @@ jobs:
               }
             ]' > config.json   
         - name: Update Elastic Beanstalk environment to use the new Docker image
-          if: create-json &&  build-push
           run: |
             aws elasticbeanstalk update-environment \
               --environment-name auto-perfecto-auth-api-qa \
-              --version-label ${{ github.sha }} \
               --option-settings file://config.json   

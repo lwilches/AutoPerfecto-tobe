@@ -19,45 +19,16 @@ jobs:
             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws-region: us-east-1
+            
+        - run: zip -r app-build.zip  ./backend/api-auth 
         
-        - name: Set up Docker Buildx
-          uses: docker/setup-buildx-action@v3.5.0   
-        - name: Log in to Amazon ECR  
-          id: login-ecr
-          uses: aws-actions/amazon-ecr-login@v2
-
-        - name: Build and push Docker image to ECR
-          id: build-push
-          env:
-            ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-            ECR_REPOSITORY: autoperfecto-auth-api
-            IMAGE_TAG: ${{ github.sha }}
-          run: |
-            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./backend/api-auth 
-            docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG   
-
-        - name: Create config.json with environment variables
-          id: create-json
-          run: |
-            echo '[
-              {
-                "Namespace": "aws:elasticbeanstalk:environment:proxy",
-                "OptionName": "ProxyServer",
-                "Value": "none"
-              },
-              {
-                "Namespace": "aws:elasticbeanstalk:container:docker",
-                "OptionName": "Image",
-                "Value": "${{ steps.login-ecr.outputs.registry }}/autoperfecto-auth-api:${{ github.sha }}"
-              },
-              {
-                "Namespace": "aws:elasticbeanstalk:environment:loadbalancer",
-                "OptionName": "ListenerPort",
-                "Value": "80"
-              }
-            ]' > config.json   
         - name: Update Elastic Beanstalk environment to use the new Docker image
-          run: |
-            aws elasticbeanstalk update-environment \
-              --environment-name auto-perfecto-auth-api-qa \
-              --option-settings file://config.json   
+          uses: einaregilsson/beanstalk-deploy@v21
+          with: 
+            aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            region: us-east-1
+            application_name : auto-perfecto-auth-api
+            environment_name: auto-perfecto-auth-api-qa 
+            deployment_package: app-build.zip
+        

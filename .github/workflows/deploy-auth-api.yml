@@ -20,21 +20,7 @@ jobs:
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws-region: us-east-1
 
-        - name: Create Dockerrun.aws.json with environment variables
-          run: |
-            echo '{
-              "AWSEBDockerrunVersion": "1",
-              "Image": {
-                "Name": "${{ steps.login-ecr.outputs.registry }}/autoperfecto-auth-api:${{ github.sha }}",
-                "Update": "true"
-              },
-              "Ports": [
-                {
-                  "ContainerPort": "5000"
-                }
-              ]
-            }' > ./backend/api-auth/Dockerrun.aws.json 
-            
+                 
         - run: |
             cd backend/api-auth
             zip -r ../../app-build.zip . 

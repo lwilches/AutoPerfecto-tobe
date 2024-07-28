@@ -1,33 +1,35 @@
 from flask import Blueprint, request, jsonify
-from src.services.auth_service import auth_service 
+from src.controllers import token_required
+from src.services.vehiculo_service import vehiculo_service 
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+vehiculos_bp = Blueprint('business', __name__)
 
-auth_bp = Blueprint('business', __name__)
 
-@auth_bp.route('/propietario/{id_user}/vehiculos', methods=['POST'])
-def register(id_user):
+
+@vehiculos_bp.route('/propietario/<int:id_user>/vehiculos/<int:id>', methods=['GET'])
+@token_required
+def dar_auto(id_user,  id_vehiculo ):
+    return vehiculo_service.dar_auto(id_user,  id_vehiculo )
+
+
+@vehiculos_bp.route('/propietario/<int:id_user>/vehiculos', methods=['POST'])
+def crear_auto(id_user):
     data = request.get_json()
-    return auth_service.register(data)
+    return  vehiculo_service.crear_auto(id_user,  data )
 
 
-@auth_bp.route('/propietario/{id_user}/vehiculos', methods=['GET'])
-def consultar_todos():
+@vehiculos_bp.route('/propietario/<int:id_user>/vehiculos', methods=['GET'])
+def dar_autos(id_user):
     data = request.get_json()
-    return auth_service.register(data)
+    return vehiculo_service.dar_autos(id_user)
 
 
 
-@auth_bp.route('/propietario/{id_user}/vehiculos/{id}', methods=['GET'])
-def consultar(id):
+@vehiculos_bp.route('/propietario/<int:id_user>/vehiculos/<int:id>', methods=['PUT'])
+def editar(id_user  , id):
     data = request.get_json()
-    return auth_service.register(data)
+    return vehiculo_service.editar_auto(id_user ,id  , data )
 
 
-
-
-@auth_bp.route('/propietario/{id_user}/vehiculos/{id}', methods=['PUT'])
-def register(id_user):
-    data = request.get_json()
-    return auth_service.register(data)
 
 

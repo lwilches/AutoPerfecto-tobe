@@ -34,9 +34,11 @@ class ManagerEnv:
         self.ulr_service_user  = ""  
         self.endpoint_consulta_user  = "" 
         self.auth_token  =  "f47fd06e-77b1-417e-8ff0-7e92fcbe97d6"
+        self.url_users = "http://auto-perfecto-auth-api-qa.eba-2pznwn73.us-east-1.elasticbeanstalk.com/user_info"
         
     
     def loads_vars_auth(self):
+        self.url_users = os.environ.get('URL_USERS', "http://auto-perfecto-auth-api-qa.eba-2pznwn73.us-east-1.elasticbeanstalk.com/user_info" )
         self.auth_token = os.environ.get('AUTH_TOKEN', "f47fd06e-77b1-417e-8ff0-7e92fcbe97d6" )
         
         
@@ -48,6 +50,7 @@ class ManagerEnv:
         self.db_user = os.environ.get('DB_USER')
         self.db_password = os.environ.get('DB_PASSWORD')
         self.db_choice = os.environ.get('DB_CHOICE', 'postgres')
+        
                 
         if self.db_choice == 'sqlite':
             # Cadena de conexión para SQLite (en memoria)

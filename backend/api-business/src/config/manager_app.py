@@ -1,12 +1,12 @@
 from flask import Flask
 from datetime  import datetime
-from src.controllers.auth_controller  import auth_bp
+from src.controllers.business_controller  import vehiculos_bp  
 from src.config.manager_env import manager_env 
 from  src.models.base import db
 from flask_jwt_extended import JWTManager
 
 app =  Flask(__name__) 
-app.register_blueprint(auth_bp)
+app.register_blueprint(vehiculos_bp)
 manager_env.load_vars_db()
 manager_env.loads_vars_auth()
 

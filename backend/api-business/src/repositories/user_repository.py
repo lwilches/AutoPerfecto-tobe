@@ -1,7 +1,6 @@
 from src.models.user import User
 from sqlalchemy.orm.exc import NoResultFound
 from src.models.base import db
-
 from src.models.user   import User , UserSchema  
 
 

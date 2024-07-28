@@ -27,10 +27,10 @@ jobs:
         - name: Build and push Docker image to ECR
           env:
             ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-            ECR_REPOSITORY: autoperfecto-auth-api
+            ECR_REPOSITORY: autoperfecto-business-api
             IMAGE_TAG: ${{ github.sha }}
           run: |
-            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./backend/api-auth
+            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./backend/api-business
             docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
 
@@ -39,7 +39,7 @@ jobs:
             echo '{
               "AWSEBDockerrunVersion": "1",
               "Image": {
-                "Name": "${{ steps.login-ecr.outputs.registry }}/autoperfecto-auth-api:${{ github.sha }}",
+                "Name": "${{ steps.login-ecr.outputs.registry }}/autoperfecto-business-api:${{ github.sha }}",
                 "Update": "true"
               },
               "Ports": [
@@ -47,9 +47,9 @@ jobs:
                   "ContainerPort": "5000"
                 }
               ]
-            }' > ./backend/api-auth/Dockerrun.aws.json 
+            }' > ./backend/api-business/Dockerrun.aws.json 
         - run: |
-            cd backend/api-auth
+            cd backend/api-business
             zip -r ../../app-build.zip . 
         
         - name: Update Elastic Beanstalk environment to use the new Docker image
@@ -58,7 +58,7 @@ jobs:
             aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             region: us-east-1
-            application_name : auto-perfecto-auth-api
-            environment_name: auto-perfecto-auth-api-qa 
+            application_name : auto-perfecto-business-api
+            environment_name: auto-perfecto-business-api-qa 
             deployment_package: app-build.zip
             version_label:  ${{ github.sha }}

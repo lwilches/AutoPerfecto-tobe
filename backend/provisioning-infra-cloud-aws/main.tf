@@ -3,6 +3,15 @@ provider "aws" {
     profile = var.user_aws_profile
 }
 
+# Crear el repositorio ECR api de autenticacion 
+resource "aws_ecr_repository" "auth_api" {
+    name = "autoperfecto-auth-api"
+}
+
+# Crear el repositorio ECR api de negocio
+resource "aws_ecr_repository" "business_api" {
+    name = "autoperfecto-business-api"
+}
 
 # Crear un rol IAM para Elastic Beanstalk
 resource "aws_iam_role" "beanstalk_role" {

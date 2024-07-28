@@ -1,4 +1,5 @@
 aws_region       = "us-east-1"
 user_aws_profile = "user-iac-beanstalk-resources"
-app_name         = "auto-perfecto-auth-api"
+app_name_auth_api         = "auto-perfecto-auth-api"
+app_name_business_api         = "auto-perfecto-business-api"
 plataform_name = "auto-perfecto-apps"

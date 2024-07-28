@@ -10,11 +10,19 @@ variable "user_aws_profile"{
     default = "profile user-iac-beanstalk-resources"
 }
 
-variable "app_name" {
+variable "app_name_auth_api" {
     description = "The name of the Elastic Beanstalk application"
     type        = string
     default     = "auto-perfecto-auth-api"
 }
+
+variable "app_name_business_api" {
+    description = "The name of the Elastic Beanstalk application"
+    type        = string
+    default     = "auto-perfecto-business-api"
+}
+
+
 
 
 variable "plataform_name" {

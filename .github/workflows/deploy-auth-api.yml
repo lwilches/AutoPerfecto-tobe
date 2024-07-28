@@ -31,4 +31,4 @@ jobs:
             application_name : auto-perfecto-auth-api
             environment_name: auto-perfecto-auth-api-qa 
             deployment_package: app-build.zip
-        
+            version_label:  ${{ github.sha }}

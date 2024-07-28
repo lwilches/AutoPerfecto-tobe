@@ -35,7 +35,9 @@ jobs:
               ]
             }' > ./backend/api-auth/Dockerrun.aws.json 
             
-        - run: zip -r app-build.zip  ./backend/api-auth 
+        - run: |
+            cd backend/api-auth
+            zip -r ../../app-build.zip 
         
         - name: Update Elastic Beanstalk environment to use the new Docker image
           uses: einaregilsson/beanstalk-deploy@v21

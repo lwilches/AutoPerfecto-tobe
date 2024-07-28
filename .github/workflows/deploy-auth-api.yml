@@ -6,7 +6,6 @@ on:
     workflow_dispatch:        
 jobs:
     deploy:
-        if: contains(github.event.pull_request.title, 'deploy api-auth')        
         runs-on: ubuntu-latest
         steps:
         - name: Checkout code 

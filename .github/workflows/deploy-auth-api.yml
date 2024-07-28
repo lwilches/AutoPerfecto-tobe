@@ -27,6 +27,7 @@ jobs:
           uses: aws-actions/amazon-ecr-login@v2
 
         - name: Build and push Docker image to ECR
+          id: build-push
           env:
             ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
             ECR_REPOSITORY: autoperfecto-auth-api
@@ -36,6 +37,8 @@ jobs:
             docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG   
 
         - name: Create config.json with environment variables
+          if: build-push  
+          id: create-json
           run: |
             echo '[
               {
@@ -60,6 +63,7 @@ jobs:
               }
             ]' > config.json   
         - name: Update Elastic Beanstalk environment to use the new Docker image
+          if: create-json &&  build-push
           run: |
             aws elasticbeanstalk update-environment \
               --environment-name auto-perfecto-auth-api-qa \

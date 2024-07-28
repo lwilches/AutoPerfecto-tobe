@@ -3,6 +3,7 @@ on:
     pull_request:
       branches:
         - dev
+    workflow_dispatch:        
 jobs:
     deploy:
         if: contains(github.event.pull_request.title, 'deploy api-auth')        

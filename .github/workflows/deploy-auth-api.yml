@@ -34,3 +34,34 @@ jobs:
           run: |
             docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./backend/api-auth 
             docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG   
+
+        - name: Create config.json with environment variables
+          run: |
+            echo '[
+              {
+                "Namespace": "aws:elasticbeanstalk:environment:proxy",
+                "OptionName": "ProxyServer",
+                "Value": "none"
+              },
+              {
+                "Namespace": "aws:elasticbeanstalk:container:docker",
+                "OptionName": "Image",
+                "Value": "${{ steps.login-ecr.outputs.registry }}/autoperfecto-auth-api:${{ github.sha }}"
+              },
+              {
+                "Namespace": "aws:elasticbeanstalk:container:docker",
+                "OptionName": "ContainerPort",
+                "Value": "5000"
+              },
+              {
+                "Namespace": "aws:elasticbeanstalk:environment:loadbalancer",
+                "OptionName": "ListenerPort",
+                "Value": "80"
+              }
+            ]' > config.json   
+        - name: Update Elastic Beanstalk environment to use the new Docker image
+          run: |
+            aws elasticbeanstalk update-environment \
+              --environment-name auto-perfecto-auth-api-qa \
+              --version-label ${{ github.sha }} \
+              --option-settings file://config.json   

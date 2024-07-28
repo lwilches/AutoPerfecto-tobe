@@ -14,6 +14,12 @@ COPY . .
 
 # Exponer el puerto en el que corre la app
 EXPOSE 5000
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+# Agregar variable de entorno con con  la database 
+ENV FLASK_DEBUG  "0"
+
+
 
 # Comando para correr la app
-CMD ["python", "app/app.py"]
+CMD ["flask", "run"]

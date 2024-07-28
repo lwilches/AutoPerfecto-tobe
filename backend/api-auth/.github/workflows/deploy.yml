@@ -1,0 +1,13 @@
+name: Deploy to Elastic Beanstalk
+on:
+    pull_request:
+      branches:
+        - dev
+
+jobs:
+    deploy:
+        if: contains(github.event.pull_request.title, 'deploy api-auth')        
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout code 
+          uses: actions/checkeout@2

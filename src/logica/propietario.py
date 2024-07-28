@@ -3,29 +3,50 @@ from setuptools import sic
 
 from sqlalchemy import Float, Integer
 from src.modelo.declarative_base import engine, Base, Session
+from src.logica.service_auth_user import ServicioAuthUser
 from src.modelo.vehiculo import Vehiculo
 from src.modelo.mantenimiento import Mantenimiento
 from src.modelo.accion import Accion
 
 class Propietario():
 
-    def __init__(self):
+    def __init__(self, base_url):
         Base.metadata.drop_all(engine)
         Base.metadata.create_all(engine)
+        self.token = ""
+        self.success = False
+        self.user_id = -1
+        self.servicio_auth_user = ServicioAuthUser(base_url)
     
     # Autenticación de usuario	a modificar con API
+
     def autenticar_usuario(self, usuario, contrasena):
+
         print(f'Usuario: {usuario}, Contraseña: {contrasena}')
 
-        # Validación de usuario temporal
+        # Obtencion de Token de API Autenticacion AWS
+        
+        self.servicio_auth_user.authenticate(usuario, contrasena)
 
-        if usuario == 'admin' and contrasena == 'admin':
+        print(f"Token: {self.servicio_auth_user.token}")
+
+        # Validacion de autenticacion -Respuesta a Vista-Login
+
+        if self.servicio_auth_user.success:
+            self.token = self.servicio_auth_user.token
+            self.success = self.servicio_auth_user.success
+            self.user_id = self.servicio_auth_user.user_id
             return True
         else:
             return False
-
+        
+       
 
     def dar_autos(self):
+        #verificar si el usuario esta autenticado
+        print(f'Usuario ID: {self.user_id}')
+
+        # invocar api para obtener autos
         session = Session()
         vehiculos = session.query(Vehiculo).all()
         session.close()

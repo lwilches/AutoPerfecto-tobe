@@ -25,13 +25,16 @@ class ServicioAuthUser:
             self.success = data.get("success")
             self.user_id = data.get("user_id")
         else:
+            self.success = False
             print(f"Failed to authenticate: {response.status_code} - {response.text}")
 
-# Ejemplo de uso
+# Test de clase ServicioAuthUser
+'''
 if __name__ == "__main__":
     auth_service = ServicioAuthUser("http://127.0.0.1:5000")
-    auth_service.authenticate("lwilches", "123")
+    auth_service.authenticate("lwilches", "124")
 
     print(f"Token: {auth_service.token}")
     print(f"Success: {auth_service.success}")
     print(f"User ID: {auth_service.user_id}")
+'''

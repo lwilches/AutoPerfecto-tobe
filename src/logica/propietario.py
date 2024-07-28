@@ -3,6 +3,7 @@ from setuptools import sic
 
 from sqlalchemy import Float, Integer
 from src.modelo.declarative_base import engine, Base, Session
+from src.modelo.nuevo_auto_dto import NuevoAutoDTO
 from src.logica.service_auth_user import ServicioAuthUser
 from src.modelo.vehiculo import Vehiculo
 from src.modelo.mantenimiento import Mantenimiento
@@ -66,19 +67,20 @@ class Propietario():
             return False
 
     def crear_auto(self, marca, placa, modelo, kilometraje, color, cilindraje, tipoDeCombustible):
-        session = Session()
-        busqueda = session.query(Vehiculo).filter(Vehiculo.placa == placa).all()
-        busqueda2 = session.query(Vehiculo).filter(Vehiculo.marca == marca).all()
-        if len(busqueda) == 0 and len(busqueda2) == 0 and len(placa) != 0 and len(marca) != 0 and len(modelo) != 0 and kilometraje != 0 and len(color) != 0 and len(cilindraje) != 0 and len(tipoDeCombustible) != 0 :
-            vehiculo = Vehiculo(placa = placa, marca = marca, color = color, modelo = modelo, cilindraje = cilindraje, 
-                kilometraje =  kilometraje, tipoDeCombustible = tipoDeCombustible)
-            session.add(vehiculo)
-            session.commit()
-            session.close()
-            return True
-        else:
-            session.close()
-            return False
+        #session = Session()
+        #busqueda = session.query(Vehiculo).filter(Vehiculo.placa == placa).all()
+        #busqueda2 = session.query(Vehiculo).filter(Vehiculo.marca == marca).all()
+        #if len(busqueda) == 0 and len(busqueda2) == 0 and len(placa) != 0 and len(marca) != 0 and len(modelo) != 0 and kilometraje != 0 and len(color) != 0 and len(cilindraje) != 0 and len(tipoDeCombustible) != 0 :
+        #    vehiculo = Vehiculo(placa = placa, marca = marca, color = color, modelo = modelo, cilindraje = cilindraje, 
+        #        kilometraje =  kilometraje, tipoDeCombustible = tipoDeCombustible)
+        #    session.add(vehiculo)
+        #    session.commit()
+        #   session.close()
+        #   return True
+        #else:
+        #    session.close()
+        #    return False
+        pass
 
     def editar_auto(self, id, marca, placa, modelo, kilometraje, color, cilindraje, tipo_combustible):
         session = Session()

@@ -16,18 +16,18 @@ class VehiculoService:
         vehiculo = self.client_vehiculo_repo.get_vehiculo_by_client_and_vehiculo_id (  client_id=  id_user , vehiculo_id= id_vehiculo  )
         if vehiculo is None:
             return jsonify({ "success" : False ,  "message": "No existe el vehiculo"}), 404 
-        return jsonify( {"success" : True ,  "message": "" ,  "data" : vehiculo  } , 200)  ; 
+        return jsonify ({"success" : True ,  "message": "" ,  "data" : vehiculo  }) , 200  
         
     def dar_autos(self,id_user   ):
         vehiculos = self.client_vehiculo_repo.get_vehiculos_by_client_id (  client_id=  id_user )
         if vehiculo is None  or len(vehiculos) == 0   :
             return jsonify({ "success" : False ,  "message": "No existe el vehiculos asociados al cliente"}), 404 
-        return jsonify( {"success" : True ,  "message": "" ,  "data" : vehiculos  } , 200)  ; 
+        return jsonify( {"success" : True ,  "message": "" ,  "data" : vehiculos  }) , 200  
     
 
     def crear_auto(self, id_user ,   dic_data_vehiculo  ):
         
-        if not all(key in dic_data_vehiculo for key in ("marca", "placa", "modelo", "kilometraje", "color", "cilindraje", "tipoDeCombustible")):
+        if not all(key in dic_data_vehiculo for key in ("marca", "placa", "modelo", "kilometraje", "color", "cilindraje", "tipo_combustible")):
             return  jsonify({ "success" : False ,  "message":  "datos incompletos"}), 400
 
         if self.vehiculo_repo.get_vehiculo_by_placa( dic_data_vehiculo["placa"] ) :

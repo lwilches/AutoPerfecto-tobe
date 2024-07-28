@@ -1,7 +1,7 @@
 
 from sqlalchemy.orm.exc import NoResultFound
 from src.models.base import db
-from src.models.client_vehiculo   import ClientVehiculo ,  ClientVehiculoSchema
+from src.models.client_vehiculo   import ClientVehiculo ,  ClientVehiculoSchema , VehiculoSchema
 from src.models.vehiculo import Vehiculo
 
 
@@ -26,13 +26,13 @@ class ClientVehiculoRepository:
         return client_vehiculo_schema.dump(results, many=True)
 
     def get_vehiculo_by_client_and_vehiculo_id(self, client_id, vehiculo_id):
-        result = db.session.query(ClientVehiculo).join(Vehiculo).filter(ClientVehiculo.id_client == client_id, ClientVehiculo.id_vehiculo == vehiculo_id).first()
-        client_vehiculo_schema = ClientVehiculoSchema()
+        result = db.session.query(Vehiculo).join(ClientVehiculo ).filter(ClientVehiculo.id_client == client_id, ClientVehiculo.id_vehiculo == vehiculo_id).first()
+        client_vehiculo_schema = VehiculoSchema()
         return client_vehiculo_schema.dump(result)
     
 
     def get_vehiculo_by_client_and_placa(self, client_id, placa):
-        result = self.session.query(ClientVehiculo).join(Vehiculo).filter(ClientVehiculo.id_client == client_id, Vehiculo.placa == placa).first()
+        result = db.session.query(ClientVehiculo).join(Vehiculo).filter(ClientVehiculo.id_client == client_id, Vehiculo.placa == placa).first()
         client_vehiculo_schema = ClientVehiculoSchema()
         return  client_vehiculo_schema.dump(result)
         

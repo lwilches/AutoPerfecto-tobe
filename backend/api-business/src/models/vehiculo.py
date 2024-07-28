@@ -2,7 +2,8 @@
 
 from src.models.base import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, auto_field
 from marshmallow import Schema, fields 
 from sqlalchemy.orm import relationship
 from  sqlalchemy import ForeignKey
@@ -16,28 +17,23 @@ class Vehiculo(db.Model):
     marca = db.Column(db.String(80), nullable=False)
     placa = db.Column(db.String(80), unique=True, nullable=False)
     modelo = db.Column(db.String(80), nullable=False)
-    kilometraje = db.Column(db.Integer, nullable=False)
+    kilometraje = db.Column(db.Numeric(18,2), nullable=False)
     color = db.Column(db.String(80), nullable=False)
-    cilindraje = db.Column(db.String(80), nullable=False)
-    tipoDeCombustible = db.Column(db.String(80), nullable=False)
+    cilindraje = db.Column(db.Numeric(18,2), nullable=False)
+    tipo_combustible = db.Column(db.String(80), nullable=False)
     
     clients = relationship("ClientVehiculo", back_populates="vehiculo")
 
 
     def serialize(self):
         return {
-            'id': self.id,
+            'id_vehiculo': self.id,
             'marca': self.marca,
             'placa': self.placa,
             'modelo': self.modelo,
             'kilometraje': self.kilometraje,
             'color': self.color,
             'cilindraje': self.cilindraje,
-            'tipoDeCombustible': self.tipoDeCombustible
+            'tipo_combustible': self.tipo_combustible
         }
 
-class VehiculoSchema(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Vehiculo
-        load_instance = True
-        include_relationships = True    

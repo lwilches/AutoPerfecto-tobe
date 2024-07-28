@@ -51,11 +51,6 @@ jobs:
                 "Value": "${{ steps.login-ecr.outputs.registry }}/autoperfecto-auth-api:${{ github.sha }}"
               },
               {
-                "Namespace": "aws:elasticbeanstalk:container:docker",
-                "OptionName": "ContainerPort",
-                "Value": "5000"
-              },
-              {
                 "Namespace": "aws:elasticbeanstalk:environment:loadbalancer",
                 "OptionName": "ListenerPort",
                 "Value": "80"

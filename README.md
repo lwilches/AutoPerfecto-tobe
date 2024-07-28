@@ -37,6 +37,10 @@ cd AutoPerfecto-tobe
 npm install
 ```
 
+## Capturas de pantalla
+![cpatura de pantallad e la palicación](https://github.com/user-attachments/assets/62a36e43-66bb-46fd-839c-0b09f018deab)
+
+
 ## Contribución
 Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 1. Haz un fork del repositorio.

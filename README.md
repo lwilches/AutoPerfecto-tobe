@@ -3,12 +3,12 @@
 | **Grupo**   | 15                                   | 
 
 ## Colaboradores
-| Integrantes | Nombre                          | Rol             | Correo                       |
+| Integrantes | Nombre                          | Rol             | GitHub                       |
 | ----------- | ------------------------------- | --------------- | ---------------------------- |
-|     1       | David Fernando Guerrero Vanegas | Team Developer  | df.guerrerov1@uniandes.edu.co|
-|     2       | Leonardo Wilches Marcelo        | Team Developer  | l.wilchesm@uniandes.edu.co   |
-|     3       | Arturo Reyna Reyes              | Team Developer  | a.reyna@uniandes.edu.co      |
-|     4       | Mario Robinson Gómez Castañeda  | Team Developer  | mr.gomezc1@uniandes.edu.co   |
+|     1       | David Fernando Guerrero Vanegas | Team Developer  | https://github.com/dafermiso|
+|     2       | Leonardo Wilches Marcelo        | Team Developer  | https://github.com/lwilches  |
+|     3       | Arturo Reyna Reyes              | Team Developer  | https://github.com/areyna004 |
+|     4       | Mario Robinson Gómez Castañeda  | Team Developer  | https://github.com/bitnavigator|
  
 
 ## AutoPerfecto-tobe

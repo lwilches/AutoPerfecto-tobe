@@ -10,8 +10,6 @@
 |     3       | Arturo Reyna Reyes              | Team Developer  | a.reyna@uniandes.edu.co      |
 |     4       | Mario Robinson Gómez Castañeda  | Team Developer  | mr.gomezc1@uniandes.edu.co   |
  
-## Reporte
-[GitInspector](https://misw-4101-practicas.github.io/MISW4101-202214-Grupo023/reports)
 
 ## AutoPerfecto-tobe
 AutoPerfecto-tobe es una herramienta automatizada diseñada para la administración del mantenimiento de tu vehículo. Este repositorio contiene todo el código fuente necesario para comenzar a utilizar AutoPerfecto-tobe.

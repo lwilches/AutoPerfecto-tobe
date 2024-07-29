@@ -118,7 +118,7 @@ class Vista_auto(QWidget):
             self.texto_kilometraje.setText(str(self.auto.kilometraje))
             self.texto_color.setText(self.auto.color)
             self.texto_cilindraje.setText(str(self.auto.cilindraje))
-            self.texto_tipo_combustible.setText(self.auto.tipoDeCombustible)
+            self.texto_tipo_combustible.setText(self.auto.tipo_combustible)
 
     def volver(self):
         """

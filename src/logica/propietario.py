@@ -8,6 +8,8 @@ from src.logica.service_auth_user import ServicioAuthUser
 from src.modelo.vehiculo import Vehiculo
 from src.modelo.mantenimiento import Mantenimiento
 from src.modelo.accion import Accion
+import  requests
+from types import SimpleNamespace
 
 class Propietario():
 
@@ -46,41 +48,101 @@ class Propietario():
     def dar_autos(self):
         #verificar si el usuario esta autenticado
         print(f'Usuario ID: {self.user_id}')
-
         # invocar api para obtener autos
-        session = Session()
-        vehiculos = session.query(Vehiculo).all()
-        session.close()
-        if len(vehiculos) == 0:
+        headers = {
+            'Authorization': f'Bearer {self.token}'
+        }
+        url = f'http://auto-perfecto-business-api-qa.eba-nnmseqpw.us-east-1.elasticbeanstalk.com/propietario/{self.user_id}/vehiculos'
+    
+        try:
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()  # Levanta una excepción para respuestas de error
+        except requests.exceptions.RequestException as e:
+            print(f"Error al realizar la solicitud: {e}")
             return False
-        else: 
-            return vehiculos
+
+        data = response.json()
+        
+        if not data.get('success'):
+            print(f"Error en la respuesta: {data.get('message', 'Unknown error')}")
+            return False 
+        
+        vehiculos_data  = data.get('data', [])
+        
+        vehiculos = []
+        for vehiculo_entry in vehiculos_data:
+            vehiculo = vehiculo_entry.get('vehiculo', {})
+            vehiculo['vendido'] = False  # Añadir la columna 'vendido'
+            vehiculos.append(vehiculo)
+                
+        
+        # Aplanar el array de vehículos
+        vehiculos = [vehiculo_entry.get('vehiculo', {}) for vehiculo_entry in vehiculos_data]
+    
+        if len(vehiculos) ==  0 :
+            return False 
+        return  vehiculos
+        
+
+
+      
 
     def dar_auto(self, id):
-        session = Session()
-        vehiculos = session.query(Vehiculo).filter(Vehiculo.id == id+1).all()
-        session.close()
-        if len(vehiculos) != 0:
-            for vehiculo in vehiculos:
-                return vehiculo
-        else:
+        
+        
+        # invocar api para obtener autos
+        headers = {
+            'Authorization': f'Bearer {self.token}'
+        }
+        url = f'http://auto-perfecto-business-api-qa.eba-nnmseqpw.us-east-1.elasticbeanstalk.com/propietario/{self.user_id}/vehiculos/{id}'
+    
+        try:
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()  # Levanta una excepción para respuestas de error
+        except requests.exceptions.RequestException as e:
+            print(f"Error al realizar la solicitud: {e}")
             return False
+        
+        
+        data = response.json()
+        
+        if not data.get('success'):
+            print(f"Error en la respuesta: {data.get('message', 'Unknown error')}")
+            return False 
+        
+        vehiculo_data  = data.get('data', {})
+        if vehiculo_data  is None  or vehiculo_data == {}: 
+            return  False 
+        
+        vehiculo  = SimpleNamespace(**vehiculo_data)
+        return vehiculo
+
 
     def crear_auto(self, marca, placa, modelo, kilometraje, color, cilindraje, tipoDeCombustible):
-        #session = Session()
-        #busqueda = session.query(Vehiculo).filter(Vehiculo.placa == placa).all()
-        #busqueda2 = session.query(Vehiculo).filter(Vehiculo.marca == marca).all()
-        #if len(busqueda) == 0 and len(busqueda2) == 0 and len(placa) != 0 and len(marca) != 0 and len(modelo) != 0 and kilometraje != 0 and len(color) != 0 and len(cilindraje) != 0 and len(tipoDeCombustible) != 0 :
-        #    vehiculo = Vehiculo(placa = placa, marca = marca, color = color, modelo = modelo, cilindraje = cilindraje, 
-        #        kilometraje =  kilometraje, tipoDeCombustible = tipoDeCombustible)
-        #    session.add(vehiculo)
-        #    session.commit()
-        #   session.close()
-        #   return True
-        #else:
-        #    session.close()
-        #    return False
-        pass
+        
+        headers = {
+            'Authorization': f'Bearer {self.token}'
+        }
+        url = f'http://auto-perfecto-business-api-qa.eba-nnmseqpw.us-east-1.elasticbeanstalk.com/propietario/{self.user_id}/vehiculos'
+    
+        new_vehiculo = {
+            "marca" : marca ,
+            "placa" : placa  ,
+            "modelo" : modelo ,
+            "kilometraje" : kilometraje ,
+            "color" : color ,
+            "cilindraje" :cilindraje  ,
+            "tipo_combustible" : tipoDeCombustible
+        }
+        try:
+            response = requests.post(url, headers=headers , json = new_vehiculo)
+            response.raise_for_status()  # Levanta una excepción para respuestas de error
+            return True
+        except requests.exceptions.RequestException as e:
+            print(f"Error al realizar la solicitud: {e}")
+            return False
+
+        
 
     def editar_auto(self, id, marca, placa, modelo, kilometraje, color, cilindraje, tipo_combustible):
         session = Session()

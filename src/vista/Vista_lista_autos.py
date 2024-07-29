@@ -128,7 +128,9 @@ class Vista_lista_autos(QWidget):
             self.distribuidor_tabla_autos.addWidget(etiqueta_acciones, 0,1,1,5, Qt.AlignCenter)
        
             for dic_auto in self.autos:
-                numero_fila=numero_fila+1
+                #numero_fila=numero_fila+1
+                
+                numero_fila =dic_auto['id_vehiculo']
 
                 etiqueta_nombre=QLabel(dic_auto['placa'])
                 etiqueta_nombre.setWordWrap(True)
@@ -139,28 +141,28 @@ class Vista_lista_autos(QWidget):
                 btn_ver_actividad.setToolTip("Editar automóvil")
                 btn_ver_actividad.setFixedSize(40,40)
                 btn_ver_actividad.setIcon(QIcon("src/recursos/004-edit-button.png"))
-                btn_ver_actividad.clicked.connect(partial(self.mostrar_auto,numero_fila-1) )
+                btn_ver_actividad.clicked.connect(partial(self.mostrar_auto,numero_fila) )
                 self.distribuidor_tabla_autos.addWidget(btn_ver_actividad,numero_fila,1,Qt.AlignCenter)
 
                 btn_editar=QPushButton("",self)
                 btn_editar.setToolTip("Añadir acciones de mantenimiento")
                 btn_editar.setFixedSize(40,40)
                 btn_editar.setIcon(QIcon("src/recursos/009-money.png"))
-                btn_editar.clicked.connect(partial(self.mostrar_acciones,numero_fila -1 ) )
+                btn_editar.clicked.connect(partial(self.mostrar_acciones,numero_fila  ) )
                 self.distribuidor_tabla_autos.addWidget(btn_editar,numero_fila,2,Qt.AlignCenter)
 
                 btn_terminar=QPushButton("",self)
                 btn_terminar.setToolTip("Vender")
                 btn_terminar.setFixedSize(40,40)
                 btn_terminar.setIcon(QIcon("src/recursos/reward.png"))
-                btn_terminar.clicked.connect(partial(self.vender_auto,numero_fila-1) )
+                btn_terminar.clicked.connect(partial(self.vender_auto,numero_fila) )
                 self.distribuidor_tabla_autos.addWidget(btn_terminar,numero_fila,3,Qt.AlignCenter)
 
                 btn_eliminar=QPushButton("",self)
                 btn_eliminar.setToolTip("Borrar")
                 btn_eliminar.setFixedSize(40,40)
                 btn_eliminar.setIcon(QIcon("src/recursos/005-delete.png"))
-                btn_eliminar.clicked.connect(partial(self.eliminar_auto,numero_fila -1) )
+                btn_eliminar.clicked.connect(partial(self.eliminar_auto,numero_fila ) )
                 self.distribuidor_tabla_autos.addWidget(btn_eliminar,numero_fila,4,Qt.AlignCenter)
 
                 if dic_auto['vendido'] == True:
